@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>subIndex</title>
+      <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../css/subIndex.css">
+  </head>
+  <body>
+    <h1>点击获取详细地理位置信息</h1>
+<p>一般情况下还会返回周围兴趣点</p>
+<a href="#" class="btn btn-default read">点击获取定位信息</a>
+<script>
+document.addEventListener('AlipayJSBridgeReady', function(){
+document.querySelector('.read').addEventListener('click', function(){
+  AlipayJSBridge.call('getLocation', function (result) {
+    if (result.error) {
+      alert(result.errorMessage);
+      return;
+    }
+    alert(JSON.stringify(result));
+    console.log(result.province, result.city, result.latitude, result.longitude, result.citycode, result.adcode, result.streetNumber, result.pois);
+    // 四个直辖市（北京，上海，重庆，天津）返回的city为空字符串，可以通过result.province来获取，所以建议result.city?result.city:result.province这样来获取city
+  });
+});
+});
+</script>
+
+      <div id="rr">
+
+      </div>
+     <script src="../libs/zepto.js"> </script>
+     <script src="../js/subIndex.js"></script>
+  </body>
+</html>
